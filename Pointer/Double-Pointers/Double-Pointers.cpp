@@ -18,7 +18,7 @@ int main()
 
     update(ptr2);
     cout << endl
-        << ptr2 << endl;
+         << ptr2 << endl;
 
     cout << endl;
     return 0;
