@@ -45,5 +45,8 @@ int main()
          << "sum of array: " << ans << endl
          << endl;
 
+    // Manually releasing dynamic memory
+    delete[] arr;
+
     return 0;
 }
