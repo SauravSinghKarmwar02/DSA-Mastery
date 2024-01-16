@@ -13,13 +13,11 @@ int main()
     int *ptr = &i;
     int **ptr2 = &ptr;
 
-    cout << endl
-         << **ptr2 << endl;
-
     update(ptr2);
     cout << endl
          << ptr2 << endl;
 
     cout << endl;
     return 0;
+
 }
