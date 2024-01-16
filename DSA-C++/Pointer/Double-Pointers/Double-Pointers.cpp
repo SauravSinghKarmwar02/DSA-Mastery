@@ -14,7 +14,7 @@ int main()
     int **ptr2 = &ptr;
 
     cout << endl
-         << **ptr2 << endl;
+          << **ptr2 << endl;
 
     update(ptr2);
     cout << endl
