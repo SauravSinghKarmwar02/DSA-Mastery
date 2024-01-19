@@ -64,6 +64,9 @@ void merge(int *arr, int s, int e)
     {
         arr[mainArrayIndex++] = second[index2++];
     }
+
+    delete[] first;
+    delete[] second;
 }
 
 // ! Function to preform merge sort using recursion
@@ -105,8 +108,7 @@ int main()
     // Ask user for the array elements
     for (int i = 0; i < size; i++)
     {
-        cout
-            << "Enter " << i << " index element: ";
+        cout << "Enter " << i << " index element: ";
         cin >> arr[i];
     }
 
@@ -121,6 +123,9 @@ int main()
          << endl
          << "Sorted Array = ";
     printArray(arr, size);
+
+    // Delete allocated memory
+    delete[] arr;
 
     cout << endl
          << endl;
