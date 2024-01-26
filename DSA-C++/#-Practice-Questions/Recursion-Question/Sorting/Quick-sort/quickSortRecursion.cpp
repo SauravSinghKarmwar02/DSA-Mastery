@@ -36,13 +36,13 @@ int partition(int arr[], int s, int e)
     // Manage left and right part
     int i = s, j = e;
 
-    while (i < pivotIndex && j > pivotIndex)
+    while (i < pivotIndex || j > pivotIndex)
     {
-        while (arr[i] < pivot)
+        while (arr[i] <= pivot && i < pivotIndex)
         {
             i++;
         }
-        while (arr[j] > pivot)
+        while (arr[j] > pivot && j > pivotIndex)
         {
             j--;
         }
