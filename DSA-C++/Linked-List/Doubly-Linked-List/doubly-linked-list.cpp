@@ -33,6 +33,24 @@ public:
         tail = nullptr;
     }
 
+    // Function to add a node at the head of the list
+    void prepend(int data)
+    {
+        Node *newNode = new Node(data);
+
+        if (!head)
+        {
+            head = newNode;
+            tail = newNode;
+        }
+        else
+        {
+            newNode->next = head;
+            head->prev = newNode;
+            head = newNode;
+        }
+    }
+
     // Function to add a node to the end of the list
     void append(int data)
     {
@@ -56,13 +74,10 @@ public:
         Node *temp = head;
         while (temp != nullptr)
         {
-            Node *temp = head;
-            while (temp != nullptr)
-            {
-                temp = temp->next;
-            }
-            cout << endl;
+            cout << temp->data << " ";
+            temp = temp->next;
         }
+        cout << endl;
     }
 
     // Function to print the elements of the list in reverse order
@@ -88,6 +103,10 @@ int main()
     myList.append(3);
     myList.append(4);
     myList.append(5);
+
+    // Prepending elements to the list
+    myList.prepend(9);
+    myList.prepend(7);
 
     // Printing the list
     cout << "Forward list: ";
