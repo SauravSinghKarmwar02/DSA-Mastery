@@ -68,6 +68,53 @@ public:
         }
     }
 
+    // Function to add a Node at a position
+    void insertAtPosition(int data, int position)
+    {
+        // Check if the position is valid
+        if (position <= 0)
+        {
+            cout << "Invalid position." << endl;
+            return;
+        }
+
+        // If the position is 1 or the list is empty, add node at the head
+        if (position == 1 || head == nullptr)
+        {
+            prepend(data);
+            return;
+        }
+
+        // Create a new node
+        Node *newNode = new Node(data);
+
+        // Traverse the list to find the position
+        Node *current = head;
+        int currentPosition = 1;
+
+        while (currentPosition < position - 1 && current != nullptr)
+        {
+            current = current->next;
+            currentPosition++;
+        }
+
+        // If position exceeds the size of the list , insert node at the end
+        if (current == nullptr)
+        {
+            append(data);
+            return;
+        }
+
+        // Insert the new node at the specified position
+        newNode->next = current->next;
+        newNode->prev = current;
+        if (current->next != nullptr)
+        {
+            current->next->prev = newNode;
+        }
+        current->next = newNode;
+    }
+
     // Function to print the elements of the list
     void printList()
     {
@@ -91,6 +138,38 @@ public:
         }
         cout << endl;
     }
+
+    // Function to sort the elements of the list
+    void bubbleSort()
+    {
+        if (!head || !head->next)
+        {
+            return;
+        }
+
+        bool swapped;
+        Node *current;
+        Node *last = nullptr;
+
+        do
+        {
+            swapped = false;
+            current = head;
+
+            while (current->next != last)
+            {
+                if (current->data > current->next->data)
+                {
+                    int temp = current->data;
+                    current->data = current->next->data;
+                    current->next->data = temp;
+                    swapped = true;
+                }
+                current = current->next;
+            }
+            last = current;
+        } while (swapped);
+    }
 };
 
 int main()
@@ -108,12 +187,27 @@ int main()
     myList.prepend(9);
     myList.prepend(7);
 
+    // Add elements in the middle of the list
+    myList.insertAtPosition(10, 4);
+    myList.insertAtPosition(15, 6);
+
     // Printing the list
     cout << "Forward list: ";
     myList.printList();
 
     // Printing the list in reverse order
     cout << "Reverse list: ";
+    myList.printReverse();
+
+    // Sorting the list
+    myList.bubbleSort();
+
+    // Printing the Sorted list
+    cout << endl << "Sorted Forward list: ";
+    myList.printList();
+
+    // Printing the Sorted list in reverse order
+    cout << "Sorted Reverse list: ";
     myList.printReverse();
 
     return 0;
