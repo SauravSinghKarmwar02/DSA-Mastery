@@ -170,6 +170,47 @@ public:
             last = current;
         } while (swapped);
     }
+
+    // Function to delete a node with a given value
+    void deleteNode(int value)
+    {
+        Node *current = head;
+
+        // Search for the node to delete
+        while (current)
+        {
+            if (current->data == value)
+            {
+                // If it's the head node
+                if (current == head)
+                {
+                    head = head->next;
+                    if (head)
+                        head->prev = nullptr;
+                }
+
+                // If it's the tail node
+                else if (current == tail)
+                {
+                    tail = tail->prev;
+                    tail->next = nullptr;
+                }
+
+                // If it's a node in the middle
+                else
+                {
+                    current->prev->next = current->next;
+                    current->next->prev = current->prev;
+                }
+                delete current;
+                return;
+            }
+            current = current->next;
+        }
+
+        // Node with the given value not found
+        cout << "Node with value " << value << " not found." << endl;
+    }
 };
 
 int main()
@@ -186,6 +227,7 @@ int main()
     // Prepending elements to the list
     myList.prepend(9);
     myList.prepend(7);
+    myList.prepend(6);
 
     // Add elements in the middle of the list
     myList.insertAtPosition(10, 4);
@@ -203,12 +245,22 @@ int main()
     myList.bubbleSort();
 
     // Printing the Sorted list
-    cout << endl << "Sorted Forward list: ";
+    cout << endl
+         << "Sorted Forward list: ";
     myList.printList();
 
     // Printing the Sorted list in reverse order
     cout << "Sorted Reverse list: ";
     myList.printReverse();
+
+    // Deleting elements from the list
+    myList.deleteNode(5);  // Deleting a node in the middle
+    myList.deleteNode(1);  // Deleting the head node
+    myList.deleteNode(15); // Deleting the tail node
+
+    cout << endl
+         << "List after deletion: ";
+    myList.printList();
 
     return 0;
 }
